@@ -1824,6 +1824,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1247279293}
+  - component: {fileID: 1247279294}
   - component: {fileID: 1247279295}
   m_Layer: 5
   m_Name: Screen
@@ -1853,6 +1854,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -8}
   m_SizeDelta: {x: -16, y: 100}
   m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &1247279294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247279292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 138f6e3ec93f147c897bcff0672bf55f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 1207289455}
+  switchTime: 0.2
+  graphics:
+  - {fileID: 170226217}
+  - {fileID: 598650557}
+  activeColor: {r: 1, g: 1, b: 1, a: 1}
+  openedColor: {r: 0.53333336, g: 0.79215693, b: 0.36862746, a: 1}
+  switchColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!222 &1247279295
 CanvasRenderer:
   m_ObjectHideFlags: 0
