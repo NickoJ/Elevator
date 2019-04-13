@@ -56,3 +56,5 @@ sysinfo.txt
 crashlytics-build.properties
 
 
+.idea
+Assets/Plugins/Editor/JetBrains*
