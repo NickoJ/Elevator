@@ -1,7 +1,7 @@
 namespace Klyukay.Lift.Models
 {
     
-    public enum LiftState
+    public enum LiftState : byte
     {
         Opened,
         Closed,

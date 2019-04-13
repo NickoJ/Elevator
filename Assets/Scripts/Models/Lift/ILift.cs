@@ -7,6 +7,7 @@ namespace Klyukay.Lift.Models
     {
         int CurrentFloor { get; }
         LiftState State { get; }
+        MoveDirection Direction { get; }
 
         event Action<int> OnFloorChanged;
         event Action<LiftState> OnStateChanged;

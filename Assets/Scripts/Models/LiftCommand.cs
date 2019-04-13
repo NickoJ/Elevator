@@ -15,7 +15,7 @@ namespace Klyukay.Lift.Models
         
     }
 
-    public enum CommandKind
+    public enum CommandKind : byte
     {
         MoveUp,
         MoveDown,

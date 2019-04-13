@@ -22,6 +22,7 @@ namespace Klyukay.Lift.Models
         public Lift(int currentCurrentFloor)
         {
             CurrentFloor = currentCurrentFloor;
+            _moveToFloor = CurrentFloor;
             _state = LiftState.Closed;
         }
 
@@ -45,6 +46,17 @@ namespace Klyukay.Lift.Models
             }
         }
 
+        public MoveDirection Direction
+        {
+            get
+            {
+                var diff = _moveToFloor - _currentFloor;
+                if (diff < 0) return MoveDirection.Down;
+                if (diff > 0) return MoveDirection.Up;
+                return MoveDirection.NoDirection;
+            }
+        }
+
         public bool Active => State != LiftState.Closed; 
         
         public event Action<int> OnFloorChanged;
@@ -54,13 +66,13 @@ namespace Klyukay.Lift.Models
         {
             if (State != LiftState.Closed)
             {
-                UnityEngine.Debug.LogError("Try to move lift in move");
+                Debug.LogError("Try to move lift in move");
                 return;
             }
 
-            State = LiftState.Moving;
             _moveToFloor = number;
             _timer = MOVE_TIME;
+            State = LiftState.Moving;
         }
         
         public void Tick(float dt)
@@ -84,7 +96,7 @@ namespace Klyukay.Lift.Models
 
         private void MoveAct()
         {
-            CurrentFloor = _currentFloor + (_currentFloor < _moveToFloor ? 1 : -1);
+            CurrentFloor = _currentFloor + Direction.ToInt();
             if (CurrentFloor != _moveToFloor)
             {
                 _timer = MOVE_TIME;

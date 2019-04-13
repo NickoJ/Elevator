@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace Klyukay.Lift.Views.Lift
 {
 
-    public class LiftColorIndicator : LiftView
+    public sealed class LiftColorIndicator : LiftView
     {
 
         [SerializeField] private float switchTime = 0.2f;
