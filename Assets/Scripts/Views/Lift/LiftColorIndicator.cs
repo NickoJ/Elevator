@@ -12,7 +12,6 @@ namespace Klyukay.Lift.Views.Lift
         [SerializeField] private float switchTime = 0.2f;
         [SerializeField] private Graphic[] graphics;
         
-        //TODO: To scriptable object
         [SerializeField] private Color activeColor;
         [SerializeField] private Color openedColor;
         [SerializeField] private Color switchColor;

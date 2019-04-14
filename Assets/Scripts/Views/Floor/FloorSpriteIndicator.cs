@@ -8,7 +8,6 @@ namespace Klyukay.Lift.Views.Floor
     public sealed class FloorSpriteIndicator : FloorIndicator
     {
      
-        //TODO: To scriptable object
         [SerializeField] private Sprite activeSprite;
         [SerializeField] private Sprite openedSprite;
         [SerializeField] private Sprite disabledSprite;

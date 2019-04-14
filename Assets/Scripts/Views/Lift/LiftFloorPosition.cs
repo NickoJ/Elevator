@@ -35,7 +35,6 @@ namespace Klyukay.Lift.Views.Lift
             OnFloorChanged(Lift.CurrentFloor);  
         }
 
-        //TODO: Take text from scriptable
         private void OnFloorChanged(int floor) => _text.text = floor.ToString();
 
     }

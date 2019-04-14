@@ -35,7 +35,6 @@ namespace Klyukay.Lift.Views.Lift
             OnStateChanged(Lift.State);  
         }
 
-        //TODO: Take text from scriptable
         private void OnStateChanged(LiftState state) => _text.text = state.ToString();
 
     }

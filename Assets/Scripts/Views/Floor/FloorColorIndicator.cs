@@ -9,7 +9,6 @@ namespace Klyukay.Lift.Views.Floor
 
         [SerializeField] private Graphic[] graphics;
         
-        //TODO: To scriptable object
         [SerializeField] private Color activeColor;
         [SerializeField] private Color openedColor;
         [SerializeField] private Color disabledColor;

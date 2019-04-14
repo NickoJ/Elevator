@@ -8,7 +8,6 @@ namespace Klyukay.Lift.Views.Floor
     public sealed class FloorStopRequestsIndicator : FloorView
     {
         
-        //TODO: To scriptable object
         [SerializeField] private Color noRequestColor;
         [SerializeField] private Color requestColor;
         [SerializeField] private StopRequests request;

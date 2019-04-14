@@ -14,7 +14,7 @@ namespace Klyukay.Lift.Models
 
         private MoveDirection _lastDirection;
         
-        public LiftManager(int floorsCount)
+        public LiftManager(int floorsCount, ILiftSettings liftSettings)
         {
             _floors = new Floor[floorsCount];
             
@@ -24,7 +24,7 @@ namespace Klyukay.Lift.Models
             }
 
             _currentFloor = _floors[0];
-            _lift = new Lift(_currentFloor.Number);
+            _lift = new Lift(liftSettings, _currentFloor.Number);
             _lift.OnFloorChanged += LiftFloorChanged;
             _lift.OnStateChanged += LiftStateChanged;
 

@@ -13,18 +13,27 @@ namespace Klyukay.Lift
         [SerializeField] private LiftInsideController insideController;
 
         private LiftManager _manager;
-        
-        private void Awake()
+
+        private void Start()
         {
-            //TODO: 10 to configurations
-            _manager = new LiftManager(10);
-            
+            enabled = false;
+        }
+
+        public void Initialize(int floorsCount, ILiftSettings liftSettings)
+        {
+            _manager = new LiftManager(floorsCount, liftSettings);
+
             floorSelector.Initialize(_manager);
             insideController.Initialize(_manager);
             liftController.Lift = _manager.Lift;
+            
+            enabled = true;
         }
 
-        private void Update() => _manager.Tick(Time.deltaTime);
+        private void Update()
+        {
+            _manager.Tick(Time.deltaTime);
+        }
 
     }
     

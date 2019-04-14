@@ -7,7 +7,7 @@ namespace Klyukay.Lift.Views.Lift
     [RequireComponent(typeof(Text))]
     public sealed class LiftDirection : LiftView
     {
-        //TODO: To scriptable object
+
         [SerializeField] private string moveUp = "U";
         [SerializeField] private string moveDown = "D";
         [SerializeField] private string stay = "-";
