@@ -1,5 +1,4 @@
 using System;
-using System.Data;
 
 namespace Klyukay.Lift.Models
 {
@@ -11,14 +10,18 @@ namespace Klyukay.Lift.Models
         private LiftState? _liftState;
         private StopRequests _stopRequests;
 
-        public Floor(int number, ICommandReceiver receiver)
+        public Floor(int number, ICommandReceiver receiver, bool canMoveUp, bool canMoveDown)
         {
             Number = number;
             _receiver = receiver;
+            CanMoveUp = canMoveUp;
+            CanMoveDown = canMoveDown;
         }
 
         public int Number { get; }
-        
+        public bool CanMoveUp { get; }
+        public bool CanMoveDown { get; }
+
         public LiftState? LiftState
         {
             get => _liftState;

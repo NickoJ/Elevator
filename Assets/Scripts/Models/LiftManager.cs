@@ -16,7 +16,7 @@ namespace Klyukay.Lift.Models
             
             for (int i = 0; i < floorsCount; i++)
             {
-                _floors[i] = new Floor(i + 1, this);
+                _floors[i] = new Floor(i + 1, this, i + 1 != floorsCount, i != 0);
             }
 
             _currentFloor = _floors[0];
