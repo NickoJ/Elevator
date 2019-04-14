@@ -15,7 +15,7 @@ MonoBehaviour:
   minValue: 1
   maxValue: 18
   startValue: 8
-  moveTime: 2
-  openingTime: 2
-  closingTime: 2
-  openedTime: 4
+  moveTime: 1
+  openingTime: 1
+  closingTime: 1
+  openedTime: 2
