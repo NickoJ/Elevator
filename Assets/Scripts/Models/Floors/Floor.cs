@@ -38,7 +38,7 @@ namespace Klyukay.Lift.Models
         public StopRequests StopRequests
         {
             get => _stopRequests;
-            private set
+            set
             {
                 if (_stopRequests == value) return;
                 _stopRequests = value;

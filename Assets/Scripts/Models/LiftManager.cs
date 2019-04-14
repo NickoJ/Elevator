@@ -44,6 +44,10 @@ namespace Klyukay.Lift.Models
         {
             _aggregator.Reset();
             _lift.ResetCurrentCommand();
+            foreach (var floor in _floors)
+            {
+                floor.StopRequests = StopRequests.NoRequests;
+            }
         }
         
         void ICommandReceiver.AddCommand(in LiftCommand command)
