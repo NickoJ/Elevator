@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Klyukay.Lift.Models
 {
@@ -6,9 +7,9 @@ namespace Klyukay.Lift.Models
     public class LiftManager : ILiftManager, ICommandReceiver, ITickable
     {
 
-        private Lift _lift;
-        private CommandAggregator _aggregator;
-        private Floor[] _floors;
+        private readonly Lift _lift;
+        private readonly CommandAggregator _aggregator;
+        private readonly Floor[] _floors;
         private Floor _currentFloor;
 
         private MoveDirection _lastDirection;
@@ -28,9 +29,12 @@ namespace Klyukay.Lift.Models
             _lift.OnStateChanged += LiftStateChanged;
 
             _aggregator = new CommandAggregator();
+            _aggregator.OnInterruption += OnAggregatorInterrupt;
 
             LiftStateChanged(_lift.State);
         }
+
+        private void OnAggregatorInterrupt() => _lift.ResetCurrentCommand();
 
         public IFloor CurrentFloor => _currentFloor;
         public IEnumerable<IFloor> Floors => _floors;
@@ -44,7 +48,7 @@ namespace Klyukay.Lift.Models
         
         void ICommandReceiver.AddCommand(in LiftCommand command)
         {
-            _aggregator.AddCommand(command);
+            _aggregator.AddCommand(command, _lift.CurrentFloor, _lift.Direction);
             TryToSendNextCommand();
         }
         
@@ -58,6 +62,7 @@ namespace Klyukay.Lift.Models
         private void LiftStateChanged(LiftState state)
         {
             _currentFloor.UpdateState(state);
+            if (state == LiftState.Closed) _aggregator.ForgetLastCommand();
         }
 
         private void TryToSendNextCommand()
