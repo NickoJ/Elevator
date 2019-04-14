@@ -75,6 +75,15 @@ namespace Klyukay.Lift.Models
             State = LiftState.Moving;
         }
         
+        public void ResetCurrentCommand()
+        {
+            if (State != LiftState.Moving) return;
+
+            _moveToFloor = CurrentFloor;
+            _timer = 0f;
+            State = LiftState.Closed;
+        }
+        
         public void Tick(float dt)
         {
             if (!Active) return;

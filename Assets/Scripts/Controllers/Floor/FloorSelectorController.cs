@@ -17,7 +17,7 @@ namespace Klyukay.Lift.Controllers
 
         public event Action<IFloor> OnFloorSelected; 
         
-        public void Initialize(LiftManager manager)
+        public void Initialize(ILiftManager manager)
         {
             foreach (var floor in manager.Floors)
             {
@@ -25,15 +25,13 @@ namespace Klyukay.Lift.Controllers
                 controller.Floor = floor;
                 
                 var selection = controller.GetComponent<FloorSelection>();
-                if (selection != null)
-                {
-                    selection.OnFloorFocusStateChanged += FloorFocusStateChanged;
-                    if (selection.Floor == manager.CurrentFloor)
-                    {
-                        _selected = selection;
-                        _selected.Selected = true;
-                    }
-                }
+                if (selection == null) continue;
+                
+                selection.OnFloorFocusStateChanged += FloorFocusStateChanged;
+                if (selection.Floor != manager.CurrentFloor) continue;
+                
+                _selected = selection;
+                _selected.Selected = true;
             }
 
             OnFloorSelected?.Invoke(_selected != null ? _selected.Floor : manager.CurrentFloor);

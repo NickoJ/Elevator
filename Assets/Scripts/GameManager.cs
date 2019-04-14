@@ -10,20 +10,21 @@ namespace Klyukay.Lift
 
         [SerializeField] private FloorSelectorController floorSelector;
         [SerializeField] private LiftController liftController;
+        [SerializeField] private LiftInsideController insideController;
 
-        private ITickable _tickable;
+        private LiftManager _manager;
         
         private void Awake()
         {
             //TODO: 10 to configurations
-            var manager = new LiftManager(10);
-            _tickable = manager;
+            _manager = new LiftManager(10);
             
-            floorSelector.Initialize(manager);
-            liftController.Lift = manager.Lift;
+            floorSelector.Initialize(_manager);
+            insideController.Initialize(_manager);
+            liftController.Lift = _manager.Lift;
         }
 
-        private void Update() => _tickable.Tick(Time.deltaTime);
+        private void Update() => _manager.Tick(Time.deltaTime);
 
     }
     

@@ -3,7 +3,7 @@
 namespace Klyukay.Lift.Models
 {
 
-    public class LiftManager : ICommandReceiver, ITickable
+    public class LiftManager : ILiftManager, ICommandReceiver, ITickable
     {
 
         private Lift _lift;
@@ -30,6 +30,11 @@ namespace Klyukay.Lift.Models
         public IEnumerable<IFloor> Floors => _floors;
         public ILift Lift => _lift;
 
+        public void ResetAllCommands()
+        {
+            _lift.ResetCurrentCommand();
+        }
+        
         private void LiftFloorChanged(int floor)
         {
             _currentFloor.Reset();
@@ -48,8 +53,8 @@ namespace Klyukay.Lift.Models
         }
 
         private float debugTimer = 5f;
-        
-        void ITickable.Tick(float dt)
+
+        public void Tick(float dt)
         {
             _lift.Tick(dt);
             if (debugTimer <= 0) return;
