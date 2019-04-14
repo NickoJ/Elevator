@@ -19,7 +19,7 @@ namespace Klyukay.Lift.Models
     {
         MoveUp,
         MoveDown,
-        Stop
+        Exit
     }
     
 }

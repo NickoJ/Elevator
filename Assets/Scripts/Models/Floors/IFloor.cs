@@ -6,10 +6,15 @@ namespace Klyukay.Lift.Models
     {
         int Number { get; }
         LiftState? LiftState { get; }
+        
+        StopRequests StopRequests { get; }
 
-        event Action<LiftState?> OnStateChanged; 
+        event Action<LiftState?> OnStateChanged;
+        event Action<StopRequests> OnStopRequestsChanged;
         
         void MoveUp();
         void MoveDown();
+        void Exit();
+        
     }
 }
