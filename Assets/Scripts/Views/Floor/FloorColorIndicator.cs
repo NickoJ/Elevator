@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Klyukay.Lift.Views
+namespace Klyukay.Lift.Views.Floor
 {
     
     public sealed class FloorColorIndicator : FloorIndicator

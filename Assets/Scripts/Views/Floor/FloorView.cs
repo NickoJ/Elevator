@@ -2,7 +2,7 @@ using Klyukay.Lift.Controllers;
 using Klyukay.Lift.Models;
 using UnityEngine;
 
-namespace Klyukay.Lift.Views
+namespace Klyukay.Lift.Views.Floor
 {
     
     public abstract class FloorView : MonoBehaviour

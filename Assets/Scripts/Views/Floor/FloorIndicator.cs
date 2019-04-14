@@ -3,7 +3,7 @@ using Klyukay.Lift.Models;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Klyukay.Lift.Views
+namespace Klyukay.Lift.Views.Floor
 {
 
     public abstract class FloorIndicator : FloorView

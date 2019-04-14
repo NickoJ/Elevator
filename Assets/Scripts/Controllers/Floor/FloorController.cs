@@ -12,6 +12,7 @@ namespace Klyukay.Lift.Controllers
 
         public IFloor Floor
         {
+            get => _floor;
             set
             {
                 _floor = value;

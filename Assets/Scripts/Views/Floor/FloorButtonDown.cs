@@ -1,4 +1,4 @@
-namespace Klyukay.Lift.Views
+namespace Klyukay.Lift.Views.Floor
 {
     public sealed class FloorButtonDown : FloorButton
     {
