@@ -8,10 +8,10 @@ namespace Klyukay.Lift.Models
     {
         
         //TODO: All to settings
-        private const float MOVE_TIME = 3f;
-        private const float OPENING_TIME = 4f;
-        private const float CLOSING_TIME = 4f;
-        private const float OPENED_TIME = 10f;
+        private const float MOVE_TIME = 1f;
+        private const float OPENING_TIME = 1f;
+        private const float CLOSING_TIME = 1f;
+        private const float OPENED_TIME = 1f;
 
         private int _currentFloor;
         private int _moveToFloor;
@@ -119,14 +119,14 @@ namespace Klyukay.Lift.Models
 
         private void OpeningAct()
         {
-            State = LiftState.Opened;
             _timer = OPENED_TIME;
+            State = LiftState.Opened;
         }
 
         private void OpenedAct()
         {
-            State = LiftState.Closing;
             _timer = CLOSING_TIME;
+            State = LiftState.Closing;
         }
 
         private void ClosingAct()

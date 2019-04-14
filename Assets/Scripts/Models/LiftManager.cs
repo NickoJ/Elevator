@@ -7,8 +7,11 @@ namespace Klyukay.Lift.Models
     {
 
         private Lift _lift;
+        private CommandAggregator _aggregator;
         private Floor[] _floors;
         private Floor _currentFloor;
+
+        private MoveDirection _lastDirection;
         
         public LiftManager(int floorsCount)
         {
@@ -23,6 +26,9 @@ namespace Klyukay.Lift.Models
             _lift = new Lift(_currentFloor.Number);
             _lift.OnFloorChanged += LiftFloorChanged;
             _lift.OnStateChanged += LiftStateChanged;
+
+            _aggregator = new CommandAggregator();
+
             LiftStateChanged(_lift.State);
         }
 
@@ -32,12 +38,19 @@ namespace Klyukay.Lift.Models
 
         public void ResetAllCommands()
         {
+            _aggregator.Reset();
             _lift.ResetCurrentCommand();
+        }
+        
+        void ICommandReceiver.AddCommand(in LiftCommand command)
+        {
+            _aggregator.AddCommand(command);
+            TryToSendNextCommand();
         }
         
         private void LiftFloorChanged(int floor)
         {
-            _currentFloor.Reset();
+            _currentFloor.ResetState();
             _currentFloor = _floors[floor - 1];
             _currentFloor.UpdateState(_lift.State);
         }
@@ -46,23 +59,22 @@ namespace Klyukay.Lift.Models
         {
             _currentFloor.UpdateState(state);
         }
-        
-        void ICommandReceiver.AddCommand(in LiftCommand command)
-        {
-            UnityEngine.Debug.Log($"Command: {command.Floor}, {command.Kind}");
-        }
 
-        private float debugTimer = 5f;
+        private void TryToSendNextCommand()
+        {
+            if (_lift.State != LiftState.Closed || !_aggregator.HasCommand) return;
+            
+            var floor = _aggregator.TakeNextFloor(_lastDirection, _currentFloor.Number);
+            _lift.MoveTo(floor);
+            _lastDirection = _lift.Direction;
+        }
 
         public void Tick(float dt)
         {
+            TryToSendNextCommand();
             _lift.Tick(dt);
-            if (debugTimer <= 0) return;
-            debugTimer -= dt;
-            if (debugTimer > 0) return;
-            _lift.MoveTo(_floors[_floors.Length - 1].Number);
         }
-        
+
     }
 
 }

@@ -1,11 +1,13 @@
 namespace Klyukay.Lift.Models
 {
     
+    [System.Flags]
     public enum MoveDirection : byte
     {
-        NoDirection,
-        Up,
-        Down
+        Undefined = 0b0,
+        NoDirection = 0b1,
+        Up = 0b10,
+        Down = 0b100
     }
 
     public static class MoveDirectionUtils
@@ -20,7 +22,17 @@ namespace Klyukay.Lift.Models
                 default: return 0;
             }
         }
-        
+
+        public static MoveDirection Invert(this MoveDirection direction)
+        {
+            switch (direction)
+            {
+                case MoveDirection.Up: return MoveDirection.Down;
+                case MoveDirection.Down: return MoveDirection.Up;
+                default: return MoveDirection.Undefined;
+            }
+        }
+
     }
     
 }

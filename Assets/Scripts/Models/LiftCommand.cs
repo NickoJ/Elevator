@@ -5,21 +5,14 @@ namespace Klyukay.Lift.Models
     {
 
         public readonly int Floor;
-        public readonly CommandKind Kind;
+        public readonly MoveDirection Direction;
 
-        public LiftCommand(int floor, CommandKind kind)
+        public LiftCommand(int floor, MoveDirection direction)
         {
             Floor = floor;
-            Kind = kind;
+            Direction = direction;
         }
         
     }
 
-    public enum CommandKind : byte
-    {
-        MoveUp,
-        MoveDown,
-        Exit
-    }
-    
 }

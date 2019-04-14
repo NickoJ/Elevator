@@ -30,6 +30,8 @@ namespace Klyukay.Lift.Models
                 if (_liftState == value) return;
                 _liftState = value;
                 OnStateChanged?.Invoke(_liftState);
+
+                if (_liftState == Models.LiftState.Closed) StopRequests = StopRequests.NoRequests;
             }
         }
 
@@ -48,24 +50,25 @@ namespace Klyukay.Lift.Models
         public event Action<StopRequests> OnStopRequestsChanged;
 
         public void UpdateState(LiftState state) => LiftState = state;
-        public void Reset() => LiftState = null;
+
+        public void ResetState() => LiftState = null;
 
         public void MoveUp()
         {
             StopRequests |= StopRequests.MoveUp;
-            SendCommand(new LiftCommand(Number, CommandKind.MoveUp));
+            SendCommand(new LiftCommand(Number, MoveDirection.Up));
         }
 
         public void MoveDown()
         {
             StopRequests |= StopRequests.MoveDown;
-            SendCommand(new LiftCommand(Number, CommandKind.MoveDown));
+            SendCommand(new LiftCommand(Number, MoveDirection.Down));
         }
 
         public void Exit()
         {
             StopRequests |= StopRequests.Exit;
-            SendCommand(new LiftCommand(Number, CommandKind.Exit));
+            SendCommand(new LiftCommand(Number, MoveDirection.NoDirection));
         }
         
         private void SendCommand(in LiftCommand command) => _receiver?.AddCommand(command);
